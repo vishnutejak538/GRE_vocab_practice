@@ -1,8 +1,8 @@
-    """
+"""
      Revise all the greg mat words list. Pass the number of the set you want to revise as
      command line argument, will go through all 30 sets if none passed. 
      python greg_revision.py set_number
-    """
+"""
 
 
 import pickle
@@ -12,14 +12,16 @@ try:
     value = sys.argv[1]
 except:
     value = "all"
-
+count = 1
 with open("greg/greg_words.p",'rb') as file:
     load = pickle.load(file)
 
 if value == "all":
     for i in range(1,31):
         for word in load["Group "+str(i)]:
-            input(word)
+            input(str(count)+". "+word)
+            count+=1
 else:
     for word in load["Group "+value]:
-        input(word)
+        input(str(count)+". "+word)
+        count+=1
