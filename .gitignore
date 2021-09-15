@@ -1,0 +1,5 @@
+__pycache__
+*.save
+git_key
+unknown_*.txt
+
