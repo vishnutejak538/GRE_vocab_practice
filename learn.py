@@ -27,7 +27,7 @@ def search_key(term, word, words_deck):
 if __name__ == "__main__":
     while True:
 
-        decks = ['common_words_', 'basic_', 'advanced_', 'end']
+        decks = ['common_words_', 'basic_', 'advanced_']
         print(decks)
 
         x = input('Select one [1-3]: ')
@@ -45,7 +45,7 @@ if __name__ == "__main__":
         print()
         while True:
             freq = [0 for x in range(len(words))]
-            all_words = [k for k,v in words.items()]
+            all_words = [k for k,_ in words.items()]
 
             if sum(freq) >= 4*len(words):
                 print('This deck is done. :)')

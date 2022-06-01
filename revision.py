@@ -2,20 +2,13 @@ import pickle
 from learn import search_key
 import os
 import sys
+from values import MAGOOSH_DICT
 
 while True:
     known = []
     unknown = []
-    if len(sys.argv) < 2:
-        print("Usage: python revision.py deck_name")
-        sys.exit(0)
-    deck = sys.argv[1]
-    deck = deck+"_"
-    deck_list = ['common_words_', 'basic_', 'advanced_']
-    if deck not in deck_list:
-        sys.exit(0)
-    # print(decks)
-
+    choice = input("Choose one: [1: common_words | 2: basic | 3: advanced]")
+    deck = MAGOOSH_DICT[int(choice)]
     y = input('Enter roman numeral for deck: ')
     path = 'magoosh/Data/' + deck + y + '.p'
 
