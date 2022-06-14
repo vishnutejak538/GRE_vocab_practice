@@ -9,18 +9,13 @@ def search_key(term, word, words_deck):
     if len(keys) != 0:
         for key in keys:
             print(key + ': ' + words_deck[word][key])  
-
             if term == 'meaning':
                 try:
                     key2 = 'eg_' + key[-1]
-                    input(key2 + ': ' + words_deck[word][key2])  # .encode('ascii', 'ignore'))
+                    print(key2 + ': ' + words_deck[word][key2])
                 except KeyError:
                     pass
-
                 print()
-
-        if term != 'meaning':
-            input()
     else:
         input('No ' + term + 's for this word. ')
 
