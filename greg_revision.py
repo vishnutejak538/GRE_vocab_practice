@@ -8,21 +8,26 @@
 import pickle
 import sys
 
-values = sys.argv[1:]
-if len(values) == 0:
-    values = "all"
+unknows = []
+if len(sys.argv) == 1:
+    start = 1
+    end = 30
+else:
+    start = sys.argv[1]
+    end = sys.argv[2]
+
 count = 1
 with open("greg/greg_words.p",'rb') as file:
     load = pickle.load(file)
-n = 0
-if values == "all":
-    values = list(range(1,31))
-print("Selected sets: ", values)
+print("Selected sets: ", start," to ", end)
 
-for i in values:
+for i in range(int(start), int(end)+1):
     for word in load["Group "+str(i)]:
         val = input(str(count)+". "+word)
         if val == "no":
-            n+=1
+            unknows.append(word)
         count+=1
-print("Number of unknown words: ", n, "\nTotal number of words: ", count)
+
+with open("unknows.txt", 'w') as file:
+    file.write(unknows)
+print("Number of unknown words: ", len(unknows), "\nTotal number of words: ", count)
