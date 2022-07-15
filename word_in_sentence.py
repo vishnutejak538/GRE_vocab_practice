@@ -3,31 +3,35 @@ import sys
 import requests
 from bs4 import BeautifulSoup
 
-word = sys.argv[1]
+def word_in_a_sentence(word:str):
+    # providing url
+    url = "https://wordsinasentence.com/"+word+"-in-a-sentence/"
 
-# providing url
-url = "https://wordsinasentence.com/"+word+"-in-a-sentence/"
+    # opening the url for reading
 
-# opening the url for reading
+    headers = {'Accept-Encoding': 'identity'}
+    r = requests.get(url, headers=headers)
 
-headers = {'Accept-Encoding': 'identity'}
-r = requests.get(url, headers=headers)
+    # data = requests.get(url)
 
-# data = requests.get(url)
+    html = r.text
 
-html = r.text
+    # parsing the html file
+    htmlParse = BeautifulSoup(html, 'html.parser')
 
-# parsing the html file
-htmlParse = BeautifulSoup(html, 'html.parser')
+    text = []
 
-text = []
+    # getting all the paragraphs
+    for para in htmlParse.find_all("p"):
+        if para.get_text() != "":
+            text.append(para.get_text().split(" 🔊")[0].strip())
 
-# getting all the paragraphs
-for para in htmlParse.find_all("p"):
-    if para.get_text() != "":
-        text.append(para.get_text().split(" 🔊")[0].strip())
+    # print(type(text[0]), text[5])
 
-# print(type(text[0]), text[5])
+    for i, sentence in enumerate(text):
+        print(i,". ",sentence, end = "\n", sep="")
 
-for i, sentence in enumerate(text):
-    print(i,". ",sentence, end = "\n", sep="")
+
+if __name__ == '__main__':
+    word = sys.argv[1]
+    word_in_a_sentence(word)
