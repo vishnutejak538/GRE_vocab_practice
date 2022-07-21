@@ -1,27 +1,20 @@
-"""
-     Revise all the greg mat words list. Pass the number of the set you want to revise as
-     command line argument, will go through all 30 sets if none passed. 
-     python greg_revision.py set_number
-"""
-
-
-import csv
+# importing required modules
+import PyPDF2
 import sys
 
-try:
-    value = sys.argv[1]
-except:
-    value = "all"
-count = 1
-data = csv.DictReader(open("greg_words_list.csv"))
 
-if value == "all":
-    for key in data.fieldnames:
-        data = csv.DictReader(open("greg_words_list.csv"))
-        for row in data:
-            input(str(count)+". "+row[key])
-            count+=1
-else:
-    for row in data:
-        input(str(count)+". "+row["Group "+value])
-        count+=1
+try:
+    page = int(sys.argv[1])
+except:
+    print("PASS THE GROUP NUMBER AS ARGUMENT.")
+    exit(0)
+
+with open('gregmatlist32groups.pdf', 'rb') as pdfFileObj:
+    pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
+    pageObj = pdfReader.getPage(page-1)
+    lines = pageObj.extractText().split("\n")
+    print(lines[0])
+    for l in lines[1:]:
+        l = l.replace("\t"," ")
+        input(l)
+
