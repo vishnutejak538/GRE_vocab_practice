@@ -1,5 +1,8 @@
+""" Pass the words you want to search as command line args """
+
 # importing modules
 import sys
+from time import sleep
 import requests
 from bs4 import BeautifulSoup
 
@@ -33,5 +36,7 @@ def word_in_a_sentence(word:str):
 
 
 if __name__ == '__main__':
-    word = sys.argv[1]
-    word_in_a_sentence(word)
+    for i in sys.argv[1:]:
+        print("Word: ", i)
+        word_in_a_sentence(i)
+        sleep(5)
