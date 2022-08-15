@@ -21,6 +21,6 @@ with open('gregmatlist32groups.pdf', 'rb') as pdfFileObj:
             unknowns.append(l)
 
 if len(unknowns) > 0:
-    with open(str(page+1)+"_unknowns.txt", 'a') as file:
+    with open(str(page)+"_unknowns.txt", 'a') as file:
         for line in unknowns:
             file.write(line+"\n")
