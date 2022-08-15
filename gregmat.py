@@ -3,6 +3,7 @@ import PyPDF2
 import sys
 
 
+unknowns = []
 try:
     page = int(sys.argv[1])
 except:
@@ -16,5 +17,10 @@ with open('gregmatlist32groups.pdf', 'rb') as pdfFileObj:
     print(lines[0])
     for l in lines[1:]:
         l = l.replace("\t"," ")
-        input(l)
+        if input(l) != "":
+            unknowns.append(l)
 
+if len(unknowns) > 0:
+    with open(str(page+1)+"_unknowns.txt", 'a') as file:
+        for line in unknowns:
+            file.write(line+"\n")
