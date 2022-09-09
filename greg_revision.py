@@ -7,6 +7,7 @@
 
 import pickle
 import sys
+import random
 
 unknows = []
 if len(sys.argv) == 1:
@@ -23,7 +24,9 @@ print("Selected sets: ", start," to ", end)
 
 for i in range(int(start), int(end)+1):
     print("Set: ", i)
-    for word in load["Group "+str(i)]:
+    words = load['Group '+str(i)]
+    random.shuffle(words)
+    for word in words:
         val = input(str(count)+". "+word)
         if val == "no":
             unknows.append(word)
